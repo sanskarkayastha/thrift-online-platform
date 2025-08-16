@@ -1,0 +1,11 @@
+{
+    "user": [{
+        "id": "1",
+        "fullName": "jhon doe",
+        "email": "jhon@gmail.com",
+        "password":"12345",
+        "phone":"12345",
+        "address":"bhaktapur",
+        "listgings":[]
+    }]
+}
