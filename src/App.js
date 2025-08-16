@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import AuthContainer from './pages/AuthContainer';
-
+import { ToastContainer } from "react-toastify"
 
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
           <Route path='/' element={<AuthContainer/>} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer/>
     </>
   );
 }

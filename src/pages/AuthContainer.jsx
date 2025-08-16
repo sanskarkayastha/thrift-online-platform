@@ -1,10 +1,14 @@
-import {React, useState} from "react"
+import {React, useEffect, useState} from "react"
 import "../Css/Auth.css"
 import Login from "../components/login"
 import SignUp from "../components/signup"
 
+
 const AuthContainer = () => {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false)
+  useEffect(()=>{
+    setIsRightPanelActive(false)
+  },[])
 
   return (
     <div

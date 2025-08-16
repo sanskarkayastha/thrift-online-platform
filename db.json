@@ -1,10 +1,76 @@
 {
-    "users": [{
-        "id": "1",
-        "fullName": "jhon doe",
-        "email": "jhon@gmail.com",
-        "password":"12345",
-        "phone":"12345",
-        "address":"bhaktapur"
-    }]
+  "users": [
+    {
+      "id": "1",
+      "fullName": "jhon doe",
+      "email": "jhon@gmail.com",
+      "password": "12345",
+      "phone": "12345",
+      "address": "bhaktapur"
+    },
+    {
+      "id": "5aa1",
+      "email": "fakedeath416@gmail.com",
+      "password": "12345678",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "26c3",
+      "email": "sanskar1@gmail.com",
+      "password": "12345678",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "0b7c",
+      "email": "sanskar2@gmail.com",
+      "password": "12345",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "4776",
+      "email": "sanskar3@gmail.com",
+      "password": "12345",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "159f",
+      "email": "sanskar4@gmail.com",
+      "password": "12345",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "2d92",
+      "email": "fakedeath417@gmail.com",
+      "password": "asdasd",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "ad59",
+      "email": "fakedeath418@gmail.com",
+      "password": "asdasd",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "8a1f",
+      "email": "fakedeath419@gmail.com",
+      "password": "123123",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    }
+  ]
 }
