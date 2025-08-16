@@ -71,6 +71,30 @@
       "fullName": "Sanskar Kayastha",
       "phone": "9823069350",
       "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "871b",
+      "email": "fakedeath410@gmail.com",
+      "password": "asdasd",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "8cc9",
+      "email": "sanskar10@gmail.com",
+      "password": "12345678",
+      "fullName": "Sanskar Kayastha",
+      "phone": "9823069350",
+      "address": "dudhpati bhaktapur"
+    },
+    {
+      "id": "2129",
+      "email": "anushkabhaju23@gmail.com",
+      "password": "12345678",
+      "fullName": "Anushka Bhaju",
+      "phone": "9860779495",
+      "address": "dudhpati bhaktapur"
     }
   ]
 }

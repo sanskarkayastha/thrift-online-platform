@@ -1,14 +1,24 @@
-import {React, useEffect, useState} from "react"
+import {React, useLayoutEffect, useState} from "react"
 import "../Css/Auth.css"
 import Login from "../components/login"
 import SignUp from "../components/signup"
+import { useLocation, useNavigate } from "react-router"
 
 
 const AuthContainer = () => {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false)
-  useEffect(()=>{
-    setIsRightPanelActive(false)
-  },[])
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useLayoutEffect(
+    ()=>{
+      if(location.state?.tab ==='login'){
+        setIsRightPanelActive(false)
+        navigate(location.pathname,{replace:true, state:null})
+      }
+    },[location,navigate]
+  )
+  
 
   return (
     <div

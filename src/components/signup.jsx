@@ -9,22 +9,26 @@ import { toast } from "react-toastify";
 const SignUp = () => {
 
   const navigate = useNavigate()
+  const [formKey, setFormKey] = useState(0)
+  const resetForm = () => setFormKey(prev => prev + 1);
   const [step,setStep] = useState("email")
-  const [user,setUser] = useState({
+  const [emailError, setEmailError] = useState()
+  const [loading,setLoading] = useState(false)
+  const initialUser = {
     email: '',
     password: '',
     fullName:'',
     phone:'',
     address:'',
-  })
-  const [emailError, setEmailError] = useState()
-  const [loading,setLoading] = useState(false)
-  const [error,setError] = useState({
+  }
+  const initialError = {
     password: '',
     fullName:'',
     phone:'',
     address:'',
-  })
+  }
+  const [user,setUser] = useState(initialUser)
+  const [error,setError] = useState(initialError)
 
   const handleChange = (e)=>{
     const {name,value} = e.target
@@ -88,7 +92,10 @@ const SignUp = () => {
         (response)=>{
           if(response){
             toast.success("Successfully Signed In")
-            navigate('/')
+            setError(initialError)
+            setUser(initialUser)
+            resetForm()
+            navigate('/', { replace: true, state: { tab: 'login' } });
           }
         }
       ).catch((error)=>{
@@ -98,7 +105,7 @@ const SignUp = () => {
   }
 
   return (
-    <form id="signUpForm">
+    <form id="signUpForm" key={formKey}>
       <SpinnerCircular enabled={loading}/>
       {
         !loading &&
