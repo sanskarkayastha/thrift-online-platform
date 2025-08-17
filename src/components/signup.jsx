@@ -94,6 +94,7 @@ const SignUp = () => {
             toast.success("Successfully Signed In")
             setError(initialError)
             setUser(initialUser)
+            setStep("login")
             resetForm()
             navigate('/', { replace: true, state: { tab: 'login' } });
           }
