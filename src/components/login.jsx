@@ -1,56 +1,39 @@
-import { useState } from "react"
-import { authToken, logUserIn } from "../services/auth"
-import { useNavigate } from "react-router"
+import { useState } from "react";
+import { authToken, logUserIn } from "../services/auth";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
-const Login = ()=>{
+const Login = ({ setIsRightPanelActive }) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  let token = authToken;
 
-    const navigate = useNavigate()
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const [error,setError] = useState('')
-    let token = authToken
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(email.trim() && password.trim()){
+      logUserIn(email,password).then((response)=>{
+        if(response.data.length>0){
+          localStorage.setItem("authToken", token);
+          localStorage.setItem("userId", response.data.id);
+          toast.success("Signed in successfully");
+          navigate("/home",{replace:true});
+        } else { setError("Incorrect Credentials"); }
+      })
+    } else { setError("Fields Cannot be Empty"); }
+  }
 
-    const handleEmailChange = (e)=>{
-        setEmail(e.target.value)
-    }
+  return (
+    <form id="loginForm">
+      <h1>Sign In</h1>
+      <span id="loginError" className="error">{error}</span>
+      <input type="email" placeholder="Email" name="email" value={email} onChange={e=>setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" name="password" value={password} onChange={e=>setPassword(e.target.value)} />
+      <p onClick={()=>setIsRightPanelActive(true)} style={{cursor:"pointer"}}>Forgot your password?</p>
+      <button onClick={handleSubmit}>Sign In</button>
+    </form>
+  );
+};
 
-    const handlePasswordChange = (e)=>{
-        setPassword(e.target.value)
-    }
-
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        if(email.trim() != '' && password.trim() != ''){
-            logUserIn(email,password).then((response)=>{
-                if(response.data.length>0){
-                    localStorage.setItem("authToken",token)
-                    localStorage.setItem("userId", response.data.id)
-                    toast.success("Signned in sucessfully ")
-                    navigate("/home",{replace:true})
-                }else{
-                    setError("Incorrect Credentials")
-                }
-            })
-        }else{
-            setError("Fields Cannot be Empty")
-        }
-        
-    }
-
-    return(
-        <form id="loginForm">
-            <h1>Sign in</h1>
-            <span id="loginSuccess" style={{ color: "green" }}></span>
-            <span id="loginError" style={{ color: "red" }}>{error}</span>
-
-            <input type="email" placeholder="Email" name="email" required  onChange={handleEmailChange}/>
-            <input type="password" placeholder="Password" name="password" required onChange={handlePasswordChange} />
-
-            <p>Forgot your password?</p>
-            <button id="signInButton" onClick={handleSubmit}>Sign In</button>
-        </form>
-    )
-}
-
-export default Login
+export default Login;

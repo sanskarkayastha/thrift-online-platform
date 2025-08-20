@@ -1,317 +1,198 @@
+/* Auth.css */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-body {
-	background: #f6f5f7;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
+.auth-page h1 {
+    font-weight: 800;           /* bold as before */
+    font-size: 2.2rem;          /* adjust as needed */
+    margin: 0 0 20px 0;
+    color: #333;
 }
 
-#errorMsg:hover{
-	cursor: pointer;
+.auth-page p {
+    font-weight: 400;
+    font-size: 14px;            /* same as your previous a, p, etc. */
+    color: #000000;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
 }
 
-a {
-	color: #333;
-	font-size: 14px;
-	text-decoration: none;
-	margin: 15px 0;
+/* Buttons inside overlay panels */
+.auth-page .overlay-panel button {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-button {
-	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
-	color: #FFFFFF;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+/* Optional: spacing for overlay text */
+.auth-page .overlay-left p,
+.auth-page .overlay-right p {
+    max-width: 80%;
+    margin: 10px auto 20px auto;
+}
+.auth-page .overlay-panel h1,
+.auth-page .overlay-panel p {
+    color: #FFFFFF;
+}
+.auth-page .error {
+    color: red;
+    font-size: 14px; /* optional: adjust size to match original */
+    margin-top: 4px; /* optional spacing */
+}
+.auth-page {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f6f5f7;
 }
 
-button:active {
-	transform: scale(0.95);
-}
-
-button:focus {
-	outline: none;
-}
-
-button.ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
-}
-
-   input[type="button"], input[type="submit"] {
-        border-radius: 20px;
-        border: 1px solid;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 12px 45px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: transform 80ms ease-in;
-    }
-
-   
-    .primary-btn {
-        background-color: #FF4B2B;
-        border-color: #FF4B2B;
-        color: #FFFFFF;
-    }
-
-   
- .back-icon-btn {
-       	background-color: transparent;
-        border-color: #FF4B2B;
-        color: #FF4B2B;
-        margin-right:5px;
-        transition: background-color 0.3s, transform 80ms ease-in;
-    }
-
-   
-    .back-icon-btn:hover {
-        background-color: #FF4B2B;
-        color: #FFFFFF;
-    }
-
-    
-    input[type="button"]:hover, input[type="submit"]:hover, button:hover {
-        transform: scale(1.05);
-    }
-
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-input[type="submit"]:active {
-	transform: scale(0.95);
-}
-
-input[type="submit"]:focus {
-	outline: none;
-}
-
-input[type="submit"].ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
-}
-
-
-form {
-	background-color: #FFFFFF;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 50px;
-	height: 100%;
-	text-align: center;
-}
-
-input {
-	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
-
+/* Container */
 .container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+              0 10px 10px rgba(0,0,0,0.22);
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  position: relative;
 }
 
+/* Form Containers */
 .form-container {
-	position: absolute;
-	top: 0;
-	height: 100%;
-	transition: all 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  width: 50%;
 }
 
-.sign-in-container {
-	left: 0;
-	width: 50%;
-	z-index: 2;
-}
+.sign-in-container { left: 0; z-index: 2; }
+.container.right-panel-active .sign-in-container { transform: translateX(100%); }
 
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
-
-.sign-up-container {
-	left: 0;
-	width: 50%;
-	opacity: 0;
-	z-index: 1;
-}
-
+.sign-up-container { left: 0; opacity: 0; z-index: 1; }
 .container.right-panel-active .sign-up-container {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
 }
 
 @keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100% { opacity: 1; z-index: 5; }
 }
 
+/* Overlay */
 .overlay-container {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 50%;
-	height: 100%;
-	overflow: hidden;
-	transition: transform 0.6s ease-in-out;
-	z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0 0;
-	color: #FFFFFF;
-	position: relative;
-	left: -100%;
-	height: 100%;
-	width: 200%;
-  	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
-  	transform: translateX(50%);
-}
+.container.right-panel-active .overlay { transform: translateX(50%); }
 
 .overlay-panel {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	text-align: center;
-	top: 0;
-	height: 100%;
-	width: 50%;
-	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transition: transform 0.6s ease-in-out;
 }
 
-.overlay-left {
-	transform: translateX(-20%);
+.overlay-left { transform: translateX(-20%); }
+.container.right-panel-active .overlay-left { transform: translateX(0); }
+
+.overlay-right { right: 0; transform: translateX(0); }
+.container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+/* Form */
+form {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
 }
 
-.container.right-panel-active .overlay-left {
-	transform: translateX(0);
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
 }
 
-.overlay-right {
-	right: 0;
-	transform: translateX(0);
+button, input[type="button"], input[type="submit"] {
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
 }
 
-.container.right-panel-active .overlay-right {
-	transform: translateX(20%);
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+  transform: scale(1.05);
 }
 
-.social-container {
-	margin: 20px 0;
+button:active, input[type="submit"]:active { transform: scale(0.95); }
+button:focus, input[type="submit"]:focus { outline: none; }
+
+button.ghost, input[type="submit"].ghost {
+  background-color: transparent;
+  border-color: #fff;
 }
 
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
+/* Button group */
+.button-group { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; }
+
+.back-icon-btn {
+  background-color: transparent;
+  border-color: #FF4B2B;
+  color: #FF4B2B;
+  margin-right: 5px;
+  transition: background-color 0.3s, transform 80ms ease-in;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
+.back-icon-btn:hover { background-color: #FF4B2B; color: #fff; }
 
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
-.add-listing-container {
-    left: 0;
-    width: 50%;
-    opacity: 1;
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 50px;
-    text-align: center;
-}
-
-input[type="file"] {
-    border: none;
-    padding: 10px 0;
-    margin: 8px 0;
-    width: 100%;
-    background-color: #f1f1f1;
-}
-
-select {
-    background-color: #eee;
-    border: none;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
-}
+/* Error message */
+#errorMsg { color: red; margin: 5px 0; cursor: pointer; }
