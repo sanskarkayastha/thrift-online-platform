@@ -1,16 +1,26 @@
-/* Auth.css */
+/* Auth.css - Scoped version */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+.auth-page {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f6f5f7;
+}
+
 .auth-page h1 {
-    font-weight: 800;           /* bold as before */
-    font-size: 2.2rem;          /* adjust as needed */
+    font-weight: 800;
+    font-size: 2.2rem;
     margin: 0 0 20px 0;
     color: #333;
 }
 
 .auth-page p {
     font-weight: 400;
-    font-size: 14px;            /* same as your previous a, p, etc. */
+    font-size: 14px;
     color: #000000;
     margin: 0 0 20px 0;
     line-height: 1.5;
@@ -30,27 +40,20 @@
     max-width: 80%;
     margin: 10px auto 20px auto;
 }
+
 .auth-page .overlay-panel h1,
 .auth-page .overlay-panel p {
     color: #FFFFFF;
 }
+
 .auth-page .error {
     color: red;
-    font-size: 14px; /* optional: adjust size to match original */
-    margin-top: 4px; /* optional spacing */
-}
-.auth-page {
-  font-family: 'Montserrat', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  background: #f6f5f7;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
 /* Container */
-.container {
+.auth-page .container {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25),
@@ -63,7 +66,7 @@
 }
 
 /* Form Containers */
-.form-container {
+.auth-page .form-container {
   position: absolute;
   top: 0;
   height: 100%;
@@ -71,11 +74,22 @@
   width: 50%;
 }
 
-.sign-in-container { left: 0; z-index: 2; }
-.container.right-panel-active .sign-in-container { transform: translateX(100%); }
+.auth-page .sign-in-container { 
+  left: 0; 
+  z-index: 2; 
+}
 
-.sign-up-container { left: 0; opacity: 0; z-index: 1; }
-.container.right-panel-active .sign-up-container {
+.auth-page .container.right-panel-active .sign-in-container { 
+  transform: translateX(100%); 
+}
+
+.auth-page .sign-up-container { 
+  left: 0; 
+  opacity: 0; 
+  z-index: 1; 
+}
+
+.auth-page .container.right-panel-active .sign-up-container {
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
@@ -88,7 +102,7 @@
 }
 
 /* Overlay */
-.overlay-container {
+.auth-page .overlay-container {
   position: absolute;
   top: 0;
   left: 50%;
@@ -99,11 +113,11 @@
   z-index: 100;
 }
 
-.container.right-panel-active .overlay-container {
+.auth-page .container.right-panel-active .overlay-container {
   transform: translateX(-100%);
 }
 
-.overlay {
+.auth-page .overlay {
   background: linear-gradient(to right, #FF4B2B, #FF416C);
   color: #fff;
   position: relative;
@@ -114,9 +128,11 @@
   transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay { transform: translateX(50%); }
+.auth-page .container.right-panel-active .overlay { 
+  transform: translateX(50%); 
+}
 
-.overlay-panel {
+.auth-page .overlay-panel {
   position: absolute;
   display: flex;
   align-items: center;
@@ -129,14 +145,25 @@
   transition: transform 0.6s ease-in-out;
 }
 
-.overlay-left { transform: translateX(-20%); }
-.container.right-panel-active .overlay-left { transform: translateX(0); }
+.auth-page .overlay-left { 
+  transform: translateX(-20%); 
+}
 
-.overlay-right { right: 0; transform: translateX(0); }
-.container.right-panel-active .overlay-right { transform: translateX(20%); }
+.auth-page .container.right-panel-active .overlay-left { 
+  transform: translateX(0); 
+}
+
+.auth-page .overlay-right { 
+  right: 0; 
+  transform: translateX(0); 
+}
+
+.auth-page .container.right-panel-active .overlay-right { 
+  transform: translateX(20%); 
+}
 
 /* Form */
-form {
+.auth-page form {
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -147,7 +174,7 @@ form {
   text-align: center;
 }
 
-input {
+.auth-page input {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
@@ -155,7 +182,9 @@ input {
   width: 100%;
 }
 
-button, input[type="button"], input[type="submit"] {
+.auth-page button, 
+.auth-page input[type="button"], 
+.auth-page input[type="submit"] {
   border-radius: 20px;
   border: 1px solid #FF4B2B;
   background-color: #FF4B2B;
@@ -169,22 +198,37 @@ button, input[type="button"], input[type="submit"] {
   transition: transform 80ms ease-in;
 }
 
-button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+.auth-page button:hover, 
+.auth-page input[type="button"]:hover, 
+.auth-page input[type="submit"]:hover {
   transform: scale(1.05);
 }
 
-button:active, input[type="submit"]:active { transform: scale(0.95); }
-button:focus, input[type="submit"]:focus { outline: none; }
+.auth-page button:active, 
+.auth-page input[type="submit"]:active { 
+  transform: scale(0.95); 
+}
 
-button.ghost, input[type="submit"].ghost {
+.auth-page button:focus, 
+.auth-page input[type="submit"]:focus { 
+  outline: none; 
+}
+
+.auth-page button.ghost, 
+.auth-page input[type="submit"].ghost {
   background-color: transparent;
   border-color: #fff;
 }
 
 /* Button group */
-.button-group { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; }
+.auth-page .button-group { 
+  display: flex; 
+  justify-content: space-between; 
+  width: 100%; 
+  margin-top: 10px; 
+}
 
-.back-icon-btn {
+.auth-page .back-icon-btn {
   background-color: transparent;
   border-color: #FF4B2B;
   color: #FF4B2B;
@@ -192,7 +236,14 @@ button.ghost, input[type="submit"].ghost {
   transition: background-color 0.3s, transform 80ms ease-in;
 }
 
-.back-icon-btn:hover { background-color: #FF4B2B; color: #fff; }
+.auth-page .back-icon-btn:hover { 
+  background-color: #FF4B2B; 
+  color: #fff; 
+}
 
 /* Error message */
-#errorMsg { color: red; margin: 5px 0; cursor: pointer; }
+.auth-page #errorMsg { 
+  color: red; 
+  margin: 5px 0; 
+  cursor: pointer; 
+}
