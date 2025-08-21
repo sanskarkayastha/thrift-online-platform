@@ -1,0 +1,31 @@
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* full viewport height */
+    background: #FFFFFF; /* body color */
+  }
+  
+
+  .content {
+    flex: 1;
+    padding: 20px;
+    margin: 0 auto;
+    min-width: 1200px;
+    
+  }
+  
+  body {
+    background: #F9FAFB; /* soft off-white */
+    color: #111827;       /* main text */
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1, h2, h3 {
+    color: #111827;
+  }
+  
+  p {
+    color: #6B7280; /* muted gray for descriptions */
+  }
+  

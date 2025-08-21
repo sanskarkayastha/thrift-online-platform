@@ -1,0 +1,36 @@
+.footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 20px 30px;
+  margin-top: auto; /* pushes footer to bottom */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer p {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #6B7280;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #2563EB;
+}

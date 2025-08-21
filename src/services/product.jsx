@@ -5,6 +5,19 @@ export const addProduct = async (productData) => {
     return response.data;
 }
 
+export let  productCategories = {
+  'Clothing & Fashion': ['Men', 'Women', 'Kids', 'Unisex'],
+  'Electronics & Gadgets': ['Phones', 'Laptops', 'Cameras', 'Audio', 'Wearables', 'Gaming'],
+  'Home & Living': ['Furniture', 'Kitchenware', 'Appliances', 'Home Decor', 'Lighting'],
+  'Books & Media': ['Books', 'Comics', 'Magazines', 'CDs/DVDs', 'Vinyl', 'Games'],
+  'Sports & Outdoors': ['Fitness', 'Outdoor Gear', 'Bicycles', 'Camping', 'Sporting Goods'],
+  'Beauty & Personal Care': ['Skincare', 'Haircare', 'Makeup', 'Perfume', 'Grooming Tools'],
+  'Toys, Kids & Baby': ['Toys', 'Baby Clothes', 'Strollers', 'Learning Tools'],
+  'Collectibles & Vintage': ['Antiques', 'Memorabilia', 'Coins', 'Art', 'Handmade Crafts'],
+  'Automotive': ['Car Accessories', 'Motorbike Gear', 'Tools', 'Spare Parts'],
+  'Other / Miscellaneous': ['General']
+}
+
 export const convertToBase64 = (files) => {
     return Promise.all(
       files.map(file => 

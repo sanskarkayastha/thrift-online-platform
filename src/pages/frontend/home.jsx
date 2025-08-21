@@ -1,15 +1,22 @@
-import Navbar from "../../components/navbar"
-import Footer from "../../components/footer"
+import React from "react";
+import HeroCarousel from "../../components/heroCarousel";
+import CardListing from "../../components/CardListing";
 
-const Home = ()=>{
+const HomePage = () => {
+  return (
+    <div className="home">
+      {/* Hero Section */}
+      <section className="hero">
+        <HeroCarousel/>
+      </section>
 
-    return(
-        <>
-            <Navbar/>   
-                <h1>This is Home Page</h1>
-            <Footer/>
-        </>
-    )
-}
+      {/* Featured Items section */}
+      <section>
+        <CardListing/>
+      </section>
 
-export default Home
+    </div>
+  );
+};
+
+export default HomePage;

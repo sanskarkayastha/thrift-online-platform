@@ -1,0 +1,126 @@
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 30px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.nav-logo a {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563EB;
+  text-decoration: none;
+}
+
+/* Search Bar */
+.nav-search {
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: 40%;
+}
+
+.nav-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  margin-left: 8px;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #2563EB;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: #2563EB;
+  color: #fff !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #1D4ED8;
+}
+
+/* Profile container */
+.profile-container {
+  position: relative;
+}
+
+.profile-btn {
+  background: #2563EB;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s;
+}
+
+.profile-btn:hover {
+  background: #1D4ED8;
+}
+
+/* Dropdown menu */
+.profile-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  min-width: 160px;
+  padding: 8px 0;
+  z-index: 1000;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #111827;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f4f6;
+  color: #2563EB;
+}

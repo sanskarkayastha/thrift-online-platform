@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Camera, X, HelpCircle, Package, Tag, DollarSign, FileText } from 'lucide-react';
-import { addProduct, convertToBase64 } from '../../services/product';
+import { addProduct, convertToBase64, productCategories } from '../../services/product';
 import { toast } from 'react-toastify';
 
 const AddProductForm = () => {
@@ -19,18 +19,7 @@ const AddProductForm = () => {
 
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const categories = {
-    'Clothing & Fashion': ['Men', 'Women', 'Kids', 'Unisex'],
-    'Electronics & Gadgets': ['Phones', 'Laptops', 'Cameras', 'Audio', 'Wearables', 'Gaming'],
-    'Home & Living': ['Furniture', 'Kitchenware', 'Appliances', 'Home Decor', 'Lighting'],
-    'Books & Media': ['Books', 'Comics', 'Magazines', 'CDs/DVDs', 'Vinyl', 'Games'],
-    'Sports & Outdoors': ['Fitness', 'Outdoor Gear', 'Bicycles', 'Camping', 'Sporting Goods'],
-    'Beauty & Personal Care': ['Skincare', 'Haircare', 'Makeup', 'Perfume', 'Grooming Tools'],
-    'Toys, Kids & Baby': ['Toys', 'Baby Clothes', 'Strollers', 'Learning Tools'],
-    'Collectibles & Vintage': ['Antiques', 'Memorabilia', 'Coins', 'Art', 'Handmade Crafts'],
-    'Automotive': ['Car Accessories', 'Motorbike Gear', 'Tools', 'Spare Parts'],
-    'Other / Miscellaneous': ['General']
-  };
+  const categories = productCategories
 
   const conditions = ['Brand New', 'Like New', 'Good', 'Fair', 'Poor'];
   const negotiableOptions = ['Yes', 'No'];

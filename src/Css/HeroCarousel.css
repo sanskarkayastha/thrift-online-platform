@@ -1,0 +1,83 @@
+.hero-carousel {
+    position: relative;
+    height: 55vh;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px auto;
+  }
+  
+  .hero-slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.8s ease-in-out;
+  }
+  
+  /* Dark overlay for readability */
+  .hero-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 40px;
+  }
+  
+  .hero-content {
+    color: #fff;
+    max-width: 500px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  
+  .hero-content p {
+    font-size: 1.05rem;
+    margin-bottom: 22px;
+    color: #E5E7EB;
+  }
+  
+  /* CTA button */
+  .btn-primary {
+    background: #2563EB;
+    color: #fff !important;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background: #1D4ED8;
+  }
+  
+  /* Dots */
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .dot.active {
+    background: #2563EB;
+  }
+  

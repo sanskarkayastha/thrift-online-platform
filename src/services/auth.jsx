@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const authToken = "12345678"
+
 
 export const logUserIn = (email,password)=>{
     if(email.trim() !=='' && password.trim() !=''){
