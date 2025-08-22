@@ -1,10 +1,11 @@
-.navbar {
+/* Namespaced Navbar CSS to prevent conflicts */
+.marketplace-navbar {
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   padding: 12px 30px;
 }
 
-.nav-container {
+.marketplace-nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,7 +14,7 @@
 }
 
 /* Logo */
-.nav-logo a {
+.marketplace-nav-logo a {
   font-size: 1.4rem;
   font-weight: 700;
   color: #2563EB;
@@ -21,7 +22,7 @@
 }
 
 /* Search Bar */
-.nav-search {
+.marketplace-nav-search {
   display: flex;
   align-items: center;
   background: #f3f4f6;
@@ -30,7 +31,7 @@
   width: 40%;
 }
 
-.nav-search input {
+.marketplace-nav-search input {
   border: none;
   outline: none;
   background: transparent;
@@ -39,14 +40,18 @@
   font-size: 0.95rem;
 }
 
+.marketplace-nav-search input::placeholder {
+  color: #9ca3af;
+}
+
 /* Links */
-.nav-links {
+.marketplace-nav-links {
   display: flex;
   align-items: center;
   gap: 18px;
 }
 
-.nav-links a {
+.marketplace-nav-links a {
   text-decoration: none;
   color: #111827;
   font-weight: 500;
@@ -56,71 +61,193 @@
   transition: color 0.2s;
 }
 
-.nav-links a:hover {
+.marketplace-nav-links a:hover {
   color: #2563EB;
 }
 
 /* Primary Button */
-.btn-primary {
+.marketplace-btn-primary {
   background: #2563EB;
   color: #fff !important;
   padding: 8px 16px;
   border-radius: 6px;
   font-weight: 600;
   transition: background 0.3s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-primary:hover {
+.marketplace-btn-primary:hover {
   background: #1D4ED8;
 }
 
 /* Profile container */
-.profile-container {
+.marketplace-profile-container {
   position: relative;
 }
 
-.profile-btn {
+.marketplace-profile-btn {
   background: #2563EB;
   color: #fff;
-  padding: 8px 14px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   font-weight: 600;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: background 0.3s;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
 }
 
-.profile-btn:hover {
+.marketplace-profile-btn:hover {
   background: #1D4ED8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+}
+
+.marketplace-profile-btn:active {
+  transform: scale(0.98);
 }
 
 /* Dropdown menu */
-.profile-dropdown {
+.marketplace-profile-dropdown {
   position: absolute;
-  top: 42px;
+  top: 48px;
   right: 0;
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-  min-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.12);
+  min-width: 180px;
   padding: 8px 0;
   z-index: 1000;
+  transition: all 0.2s ease;
 }
 
-.profile-dropdown a {
-  display: block;
-  padding: 10px 14px;
+.marketplace-profile-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.marketplace-profile-dropdown.closed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+}
+
+.marketplace-profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-left: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+  transform: rotate(45deg);
+}
+
+.marketplace-profile-dropdown a,
+.marketplace-profile-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
   text-decoration: none;
   color: #111827;
   font-size: 0.95rem;
   transition: background 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.profile-dropdown a:hover {
+.marketplace-profile-dropdown a:hover,
+.marketplace-profile-dropdown button:hover {
   background: #f3f4f6;
   color: #2563EB;
+}
+
+.marketplace-dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px 0;
+}
+
+/* Login Button - Add this to your existing Navbar.css */
+.marketplace-btn-login {
+  background: #ffffff !important;
+  color: #2563EB !important;
+  border: 2px solid #2563EB;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.marketplace-btn-login:hover {
+  background: #2563EB !important;
+  color: #ffffff !important;
+  border-color: #2563EB;
+}
+
+/* Alternative solid style if you prefer */
+.marketplace-btn-login-solid {
+  background: #2563EB;
+  color: #ffffff !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.marketplace-btn-login-solid:hover {
+  background: #1D4ED8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .marketplace-navbar {
+    padding: 12px 16px;
+  }
+
+  .marketplace-nav-search {
+    width: 30%;
+  }
+
+  .marketplace-nav-links {
+    gap: 12px;
+  }
+
+  .marketplace-nav-links a span {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .marketplace-nav-search {
+    display: none;
+  }
+  
+  .marketplace-nav-links {
+    gap: 8px;
+  }
 }

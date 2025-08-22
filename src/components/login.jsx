@@ -14,7 +14,7 @@ const Login = ({ setIsRightPanelActive }) => {
     if(email.trim() && password.trim()){
       logUserIn(email,password).then((response)=>{
         if(response.data.length>0){
-          localStorage.setItem("authToken", response.data.id);
+          localStorage.setItem("authToken", response.data[0].id);
           toast.success("Signed in successfully");
           navigate("/",{replace:true});
         } else { setError("Incorrect Credentials"); }

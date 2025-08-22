@@ -8,3 +8,7 @@ export const logUserIn = (email,password)=>{
         return data
     }
 }
+
+export const logUserOut = ()=>{
+    localStorage.clear()
+}
