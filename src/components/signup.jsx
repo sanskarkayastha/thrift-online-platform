@@ -34,7 +34,10 @@ const SignUp = ({ setIsRightPanelActive }) => {
 
     if(hasError){ setError(tempError); }
     else {
-      addUser(user).then(res=>{
+      addUser({
+        ...user,
+        "listings": []
+      }).then(res=>{
         toast.success("Successfully Signed Up");
         setStep("email"); setUser({ email:'', password:'', fullName:'', phone:'', address:'' });
         navigate('/', { replace:true, state:{ tab:'login' } });

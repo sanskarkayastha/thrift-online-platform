@@ -76,7 +76,10 @@ const AddProductForm = () => {
   };
 
   const handleSubmit = () => {
-      addProduct(formData).then(res=>{
+      addProduct({
+        ...formData,
+        "userId":userId
+      }).then(res=>{
         if(res){
           toast.success('Product added successfully!');
         }

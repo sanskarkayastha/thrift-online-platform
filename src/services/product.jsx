@@ -5,6 +5,11 @@ export const addProduct = async (productData) => {
     return response.data;
 }
 
+export const getAllProduct = async ()=>{
+  let data = await axios.get("http://localhost:4000/products")
+  return data.data
+}
+
 export let  productCategories = {
   'Clothing & Fashion': ['Men', 'Women', 'Kids', 'Unisex'],
   'Electronics & Gadgets': ['Phones', 'Laptops', 'Cameras', 'Audio', 'Wearables', 'Gaming'],
@@ -30,4 +35,22 @@ export const convertToBase64 = (files) => {
       )
     );
 };
+
+export const getUserListings = async (id)=>{
+  let listings = []
+  await getAllProduct().then(
+    (response)=>{
+      if(response.length>0){
+        response.forEach(
+          (listing)=>{
+            if(listing.userId.trim() === id.trim()){
+              listings.push(listing)
+            }
+          }
+        )
+      }
+    }
+  ) 
+  return listings
+}
   

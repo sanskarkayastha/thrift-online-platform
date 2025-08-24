@@ -26,3 +26,13 @@ export const addUser = async (user)=>{
         return false
     }
 }
+
+export const updateUserListings = async (id,listings)=>{
+    let data = await axios.patch(`http://localhost:4000/users,${id}`,{"listings":listings})
+    return data
+}
+
+export const getUserById = async (id)=>{
+    let data = await axios.get(`http://localhost:4000/users,${id}`)
+    return data
+}
