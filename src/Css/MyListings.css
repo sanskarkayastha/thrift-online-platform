@@ -1,0 +1,41 @@
+/* Wrapper for spacing around grid */
+.listings-wrapper {
+    padding: 20px;
+  }
+  
+  /* Responsive grid layout */
+  .listings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    justify-items: center; /* keeps cards centered if row isn’t full */
+  }
+  
+  /* Each card */
+  .listings-container > * {
+    width: 100%;
+    max-width: 340px; /* ensures consistent card size */
+  }
+  
+  /* Empty state */
+  .no-listings {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #6B7280;
+    margin-top: 40px;
+  }
+  
+  /* Mobile Friendly Breakpoints */
+  @media (max-width: 1024px) {
+    .listings-container {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .listings-container {
+      grid-template-columns: 1fr; /* stack in one column */
+      justify-items: center;
+    }
+  }
+  

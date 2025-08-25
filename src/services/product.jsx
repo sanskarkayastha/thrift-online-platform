@@ -36,21 +36,8 @@ export const convertToBase64 = (files) => {
     );
 };
 
-export const getUserListings = async (id)=>{
-  let listings = []
-  await getAllProduct().then(
-    (response)=>{
-      if(response.length>0){
-        response.forEach(
-          (listing)=>{
-            if(listing.userId.trim() === id.trim()){
-              listings.push(listing)
-            }
-          }
-        )
-      }
-    }
-  ) 
-  return listings
-}
+export const getUserListings = async (id) => {
+  const response = await getAllProduct();
+  return response.filter((listing) => listing.userId === id);
+};
   
