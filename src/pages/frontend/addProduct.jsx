@@ -29,7 +29,7 @@ const AddProductForm = () => {
       toast.error("You must be LoggedIn to add Product")
       navigate("/login")
     }
-    },[navigate]
+    },[navigate,id]
   )
 
   const [formData, setFormData] = useState({
@@ -103,7 +103,7 @@ const AddProductForm = () => {
           (res)=>{
             if(res){
               toast.success('Product updated successfully!');
-              navigate("/myListings")
+              navigate("/profile/myListings")
             }
           }
         )

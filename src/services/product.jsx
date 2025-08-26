@@ -73,3 +73,8 @@ export const getAllProducts = async (userId = null) => {
 
   return products;
 };
+
+export const deleteProductById = async (id)=>{
+  const response = await axios.delete(`http://localhost:4000/products/${id}`)
+  return response.data
+}

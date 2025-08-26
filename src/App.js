@@ -9,10 +9,11 @@ import MyListings from './pages/frontend/myListings';
 import ProfileLayout from './pages/frontend/ProfileLayout';
 import ProfilePage from './pages/frontend/ProfilePage';
 import ProductPage from './pages/frontend/ProductPage';
+import ListingsPage from './pages/frontend/ListingPage';
 
 
 function App() {
-  return (      
+  return (     
     <>
       <BrowserRouter>
         <Routes>
@@ -21,6 +22,7 @@ function App() {
             <Route path='/addProduct' element={<AddProductForm/>}/>
             <Route path='/editProduct/:id' element={<AddProductForm/>}/>
             <Route path='/product/:id' element={<ProductPage/>}/>
+            <Route path="products" element={<ListingsPage />} />
             <Route path="/profile" element={<ProfileLayout />}>
               <Route index element={<ProfilePage />} />
               <Route path="myListings" element={<MyListings />} />

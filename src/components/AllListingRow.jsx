@@ -20,7 +20,7 @@ const AllListingRow = () => {
         <h2>All Products</h2>
       </div>
 
-      <div className="all-listings-grid">
+      <div className="all-listings-grid listings-container">
         {products.slice(0, visibleCount).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

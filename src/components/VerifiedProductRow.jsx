@@ -27,7 +27,7 @@ const VerifiedProductRow = () => {
         </span>
       </div>
 
-      <div className="verified-grid">
+      <div className="verified-grid listings-container">
         {products.slice(0, 4).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

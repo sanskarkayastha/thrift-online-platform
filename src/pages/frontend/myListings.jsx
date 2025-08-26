@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { getUserListings } from "../../services/product";
 import ProductCard from "../../components/ProductCard";
-import "../../Css/MyListings.css"; // import css file
+import "../../Css/MyListings.css";
 
 const MyListings = () => {
   const [listings, setListings] = useState([]);
 
-  useEffect(() => {
+  const fetchListings = async () => {
     let id = localStorage.getItem("authToken");
     if (id) {
-      getUserListings(id).then((response) => {
-        if (response.length > 0) {
-          setListings(response);
-        }
-      });
+      const response = await getUserListings(id);
+      if (response.length > 0) {
+        setListings(response);
+      } else {
+        setListings([]);
+      }
     }
+  };
+
+  useEffect(() => {
+    fetchListings();
   }, []);
 
   return (
@@ -22,7 +27,12 @@ const MyListings = () => {
       {listings.length > 0 ? (
         <div className="listings-container">
           {listings.map((product) => (
-            <ProductCard key={product.id} product={product} isListing={true}/>
+            <ProductCard
+              key={product.id}
+              product={product}
+              isListing={true}
+              onDelete={fetchListings} // <-- pass the callback here
+            />
           ))}
         </div>
       ) : (

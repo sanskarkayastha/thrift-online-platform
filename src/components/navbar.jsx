@@ -25,7 +25,7 @@ const Navbar = () => {
     logUserOut();
     toast.success("Logged Out Successfully");
     setUserState(false);
-    navigate("/");
+    window.location.href = "/";
   };
 
   const handleSearch = (e) => {
