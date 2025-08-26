@@ -1,0 +1,36 @@
+import React from "react";
+import { Outlet, NavLink } from "react-router";
+import "../../Css/ProfileLayout.css";
+import { User, List, Settings, LogOut } from "lucide-react";
+
+const ProfileLayout = () => {
+  return (
+    <div className="profile-layout">
+      {/* Sidebar */}
+      <aside className="profile-sidebar">
+        <h2 className="sidebar-title">Account</h2>
+        <nav className="sidebar-nav">
+          <NavLink to="/profile" end className="sidebar-link">
+            <User size={18} /> Profile
+          </NavLink>
+          <NavLink to="MyListings" className="sidebar-link">
+            <List size={18} /> My Listings
+          </NavLink>
+          <NavLink to="settings" className="sidebar-link">
+            <Settings size={18} /> Settings
+          </NavLink>
+          <NavLink to="/logout" className="sidebar-link logout">
+            <LogOut size={18} /> Logout
+          </NavLink>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="profile-content">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default ProfileLayout;

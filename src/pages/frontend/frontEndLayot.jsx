@@ -8,6 +8,7 @@ import "../../Css/FrontEndLayout.css";
 const FrontEndLayout = () => {
     const location = useLocation()
     const [isLoggedIn, setLoggedIn] = useState(false)
+    const isProfileRoute = location.pathname.startsWith("/profile");
     useLayoutEffect(
         ()=>{
           let token = localStorage.getItem("authToken")
@@ -19,7 +20,7 @@ const FrontEndLayout = () => {
     return (
         <div className="layout">
             <Navbar  isLoggedIn = {isLoggedIn}/>
-            <main className="content">
+            <main className={isProfileRoute ? "content no-padding" : "content"}>
                 <Outlet context={{isLoggedIn}} />
             </main>
             <Footer />

@@ -9,10 +9,17 @@
 
   .content {
     flex: 1;
-    padding: 20px;
     margin: 0 auto;
     min-width: 1200px;
-    
+    padding: 20px 40px;
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .default-padding {
+    padding: 20px;
   }
   
   body {

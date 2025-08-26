@@ -40,4 +40,16 @@ export const getUserListings = async (id) => {
   const response = await getAllProduct();
   return response.filter((listing) => listing.userId === id);
 };
+
+export const getProductById = async (id)=>{
+
+  const response = await axios.get(`http://localhost:4000/products/${id}`)
+  return response.data
+}
+
+export const updateProductData = async (id,updatedData)=>{
+
+  const response = await axios.put(`http://localhost:4000/products/${id}`,updatedData)
+  return response.data
+}
   

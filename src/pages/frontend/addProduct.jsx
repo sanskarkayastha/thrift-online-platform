@@ -1,20 +1,30 @@
 import { useEffect, useState } from 'react';
 import { Camera, X, HelpCircle, Package, Tag, DollarSign } from 'lucide-react';
-import { addProduct, convertToBase64, productCategories } from '../../services/product';
+import { addProduct, convertToBase64, getProductById, productCategories, updateProductData } from '../../services/product';
 import { toast } from 'react-toastify';
 import '../../Css/AddProductForm.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 const AddProductForm = () => {
 
   const [userId, setUserId] = useState('')
   const navigate = useNavigate()
+  const {id} = useParams()
 
   useEffect(
     ()=>{
     const userId = localStorage.getItem("authToken")
     if(userId){
       setUserId(userId)
+      if(id){
+        getProductById(id).then(
+          (response)=>{
+            if(response){
+              setFormData(response)
+            }
+          }
+        )
+      }
     }else{
       toast.error("You must be LoggedIn to add Product")
       navigate("/login")
@@ -76,16 +86,29 @@ const AddProductForm = () => {
   };
 
   const handleSubmit = () => {
-      addProduct({
-        ...formData,
-        "userId":userId
-      }).then(res=>{
-        if(res){
-          toast.success('Product added successfully!');
-        }
-      }).catch(err=>{
-        toast.error('Failed to add product');
-      })
+      if(!id){
+        addProduct({
+          ...formData,
+          "userId":userId
+        }).then(res=>{
+          if(res){
+            toast.success('Product added successfully!');
+            navigate("/myListings")
+          }
+        }).catch(err=>{
+          toast.error('Failed to add product');
+        })
+      }else{
+        updateProductData(id,formData).then(
+          (res)=>{
+            if(res){
+              toast.success('Product updated successfully!');
+              navigate("/myListings")
+            }
+          }
+        )
+      }
+      
   };
 
   const formatPrice = (value) => {
@@ -109,10 +132,20 @@ const AddProductForm = () => {
     <div className="add-product-container">
       <div className="add-product-wrapper">
         {/* Header */}
-        <div className="add-product-header">
-          <h1 className="add-product-title">Add New Product</h1>
-          <p className="add-product-subtitle">Create your product listing quickly and easily</p>
-        </div>
+        {
+          id ? (
+            <div className="add-product-header">
+              <h1 className="add-product-title">Edit Product</h1>
+              <p className="add-product-subtitle">Modify your product listing quickly and easily</p>
+            </div>
+
+          ):(
+            <div className="add-product-header">
+              <h1 className="add-product-title">Add New Product</h1>
+              <p className="add-product-subtitle">Create your product listing quickly and easily</p>
+            </div>
+          )
+        }
 
         {/* Main Grid Layout */}
         <div className="add-product-grid">
@@ -322,14 +355,28 @@ const AddProductForm = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="add-product-submit-container">
-                  <button
-                    onClick={handleSubmit}
-                    className="add-product-submit-btn"
-                  >
-                    Publish Product
-                  </button>
-                </div>
+                {
+                  id ? (
+                    <div className="add-product-submit-container">
+                      <button
+                        onClick={handleSubmit}
+                        className="add-product-submit-btn"
+                      >
+                        Confirm Edit
+                      </button>
+                    </div>
+
+                  ):(
+                    <div className="add-product-submit-container">
+                      <button
+                        onClick={handleSubmit}
+                        className="add-product-submit-btn"
+                      >
+                        Publish Product
+                      </button>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
