@@ -53,3 +53,23 @@ export const updateProductData = async (id,updatedData)=>{
   return response.data
 }
   
+
+export const getVerifiedProducts = async (userId = null) => {
+  const response = await axios.get("http://localhost:4000/products");
+  let products = response.data;
+
+  products = products.filter(p => p.verify === "Yes");
+
+  if (userId) products = products.filter(p => p.userId !== userId);
+
+  return products;
+};
+
+export const getAllProducts = async (userId = null) => {
+  const response = await axios.get("http://localhost:4000/products");
+  let products = response.data;
+
+  if (userId) products = products.filter(p => p.userId !== userId);
+
+  return products;
+};

@@ -33,6 +33,6 @@ export const updateUserListings = async (id,listings)=>{
 }
 
 export const getUserById = async (id)=>{
-    let data = await axios.get(`http://localhost:4000/users,${id}`)
+    let data = await axios.get(`http://localhost:4000/users/${id}`)
     return data
 }

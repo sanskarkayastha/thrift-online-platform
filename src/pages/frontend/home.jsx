@@ -1,20 +1,25 @@
 import React from "react";
 import HeroCarousel from "../../components/heroCarousel";
-import CardListing from "../../components/CardListing";
+import VerifiedProductRow from "../../components/VerifiedProductRow";
+import AllListingRow from "../../components/AllListingRow";
 
 const HomePage = () => {
   return (
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
-        <HeroCarousel/>
+        <HeroCarousel />
       </section>
 
-      {/* Featured Items section */}
+      {/* Verified Products */}
       <section>
-        <CardListing/>
+        <VerifiedProductRow />
       </section>
 
+      {/* All Products */}
+      <section>
+        <AllListingRow />
+      </section>
     </div>
   );
 };

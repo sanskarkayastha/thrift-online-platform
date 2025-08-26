@@ -6,32 +6,35 @@ import { toast } from 'react-toastify';
 import { NavLink, useNavigate } from 'react-router';
 
 const Navbar = () => {
-
-  const [isUserLoggedIn, setUserState] = useState(false)
-  const navigate = useNavigate()
-  useEffect(
-    ()=>{
-      const id = localStorage.getItem("authToken")
-      if(id){
-        setUserState(true)
-      }else{
-        setUserState(false)
-      }
-    },[]
-  )
-
+  const [isUserLoggedIn, setUserState] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const id = localStorage.getItem("authToken");
+    setUserState(!!id);
+  }, []);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogOut = ()=>{
-    logUserOut()
-    toast.success("Logged Out Successfully")
-    setUserState(false)
-    navigate("/")
-  }
+  const handleLogOut = () => {
+    logUserOut();
+    toast.success("Logged Out Successfully");
+    setUserState(false);
+    navigate("/");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+      setSearchTerm("");
+    }
+  };
 
   return (
     <nav className="marketplace-navbar">
@@ -42,10 +45,15 @@ const Navbar = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="marketplace-nav-search">
+        <form className="marketplace-nav-search" onSubmit={handleSearch}>
           <Search size={18} color="#6b7280" />
-          <input type="text" placeholder="Search for items..." />
-        </div>
+          <input
+            type="text"
+            placeholder="Search for items..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
 
         {/* Navigation Links */}
         <div className="marketplace-nav-links">
@@ -62,43 +70,43 @@ const Navbar = () => {
             <span>Sell</span>
           </NavLink>
 
-          {
-            isUserLoggedIn ? (
-              <>
-                {/* Profile Container */}
-                <div className="marketplace-profile-container">
-                  <button className="marketplace-profile-btn" onClick={toggleDropdown}>
-                    <User size={20} />
-                  </button>
+          {isUserLoggedIn ? (
+            <>
+              {/* Profile Container */}
+              <div className="marketplace-profile-container">
+                <button className="marketplace-profile-btn" onClick={toggleDropdown}>
+                  <User size={20} />
+                </button>
 
-                  {/* Dropdown Menu */}
-                  <div className={`marketplace-profile-dropdown ${isDropdownOpen ? 'open' : 'closed'}`}>
-                    <NavLink to="/profile">
-                      <User size={16} />
-                      My Profile
-                    </NavLink>
-                    <a href="/settings">
-                      <Settings size={16} />
-                      Settings
-                    </a>
-                    <div className="marketplace-dropdown-divider"></div>
-                    <button onClick={handleLogOut}>
-                      <LogOut size={16} />
-                      Logout
-                    </button>
-                  </div>
+                {/* Dropdown Menu */}
+                <div
+                  className={`marketplace-profile-dropdown ${isDropdownOpen ? 'open' : 'closed'}`}
+                >
+                  <NavLink to="/profile">
+                    <User size={16} />
+                    My Profile
+                  </NavLink>
+                  <NavLink to="/settings">
+                    <Settings size={16} />
+                    Settings
+                  </NavLink>
+                  <div className="marketplace-dropdown-divider"></div>
+                  <button onClick={handleLogOut}>
+                    <LogOut size={16} />
+                    Logout
+                  </button>
                 </div>
-              </>
-            ) : (
-              <>
-                {/* Login Button for non-logged in users */}
-                <a href="/login" className="marketplace-btn-login">
-                  <LogIn size={18} />
-                  <span>Login</span>
-                </a>
-              </>
-            )
-          }
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Login Button for non-logged in users */}
+              <NavLink to="/login" className="marketplace-btn-login">
+                <LogIn size={18} />
+                <span>Login</span>
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </nav>
