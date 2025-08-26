@@ -10,6 +10,8 @@ import ProfileLayout from './pages/frontend/ProfileLayout';
 import ProfilePage from './pages/frontend/ProfilePage';
 import ProductPage from './pages/frontend/ProductPage';
 import ListingsPage from './pages/frontend/ListingPage';
+import MessagesList from './pages/frontend/MessageList';
+import ChatPage from './pages/frontend/ChatPage';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path="/profile" element={<ProfileLayout />}>
               <Route index element={<ProfilePage />} />
               <Route path="myListings" element={<MyListings />} />
+              <Route path="messages" element={<MessagesList />} />
+              <Route path="messages/:sellerId" element={<ChatPage/>} />
               {/* <Route path="settings" element={<SettingsPage />} /> */}
             </Route>
           </Route>

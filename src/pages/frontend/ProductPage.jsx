@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { getProductById } from "../../services/product";
 import { getUserById } from "../../services/user";
+import { getChat, createChat } from "../../services/chat"; // import chat services
 import "../../Css/ProductPage.css";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [seller, setSeller] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const currentUserId = localStorage.getItem("authToken"); // logged-in user
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,6 +36,25 @@ const ProductPage = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleMessageSeller = async () => {
+    if (!currentUserId) {
+      alert("Please login to send messages.");
+      return;
+    }
+
+    if (!seller) return;
+
+    // Check if chat exists
+    let chatData = await getChat(currentUserId, seller.id);
+    if (!chatData) {
+      // create new chat
+      chatData = await createChat(currentUserId, seller.id);
+    }
+
+    // Navigate to chat page in profile
+    navigate(`/profile/messages/${seller.id}`);
+  };
 
   if (!product) {
     return (
@@ -59,13 +82,11 @@ const ProductPage = () => {
             <div className="product-page-main-image">
               <img src={selectedImage} alt={product.productName} />
               {product.verified && (
-                <div className="product-page-verified-badge">
-                  ✓ Verified
-                </div>
+                <div className="product-page-verified-badge">✓ Verified</div>
               )}
             </div>
           )}
-          
+
           {product.images && product.images.length > 1 && (
             <div className="product-page-thumbnails">
               {product.images.slice(0, 5).map((img, index) => (
@@ -85,29 +106,27 @@ const ProductPage = () => {
 
         {/* Right: Details */}
         <div className="product-page-details">
-          {/* Header */}
           <div className="product-page-header">
             <h1>{product.productName}</h1>
             <div className="product-page-price">Rs. {product.price}</div>
-            <div className="product-page-status available">
-              ● Available
-            </div>
+            <div className="product-page-status available">● Available</div>
           </div>
 
-          {/* Product Info */}
           <div className="product-page-info-grid">
             <div className="product-page-info-item">
               <div className="product-page-info-label">Condition</div>
               <div className="product-page-info-value">{product.condition}</div>
             </div>
-            
+
             <div className="product-page-info-item">
               <div className="product-page-info-label">Negotiable</div>
-              <div className={`product-page-info-value ${
-                product.negotiable === "Yes" 
-                  ? "product-page-negotiable-yes" 
-                  : "product-page-negotiable-no"
-              }`}>
+              <div
+                className={`product-page-info-value ${
+                  product.negotiable === "Yes"
+                    ? "product-page-negotiable-yes"
+                    : "product-page-negotiable-no"
+                }`}
+              >
                 {product.negotiable === "Yes" ? "✓ Yes" : "✗ No"}
               </div>
             </div>
@@ -127,54 +146,58 @@ const ProductPage = () => {
             )}
           </div>
 
-          {/* Description */}
           <div className="product-page-description">
             <h3>📝 Description</h3>
             <p>{product.productDescription}</p>
           </div>
 
-          {/* Tags */}
           {product.tags && (
             <div>
-              <h3 style={{ 
-                fontSize: '1.1rem', 
-                fontWeight: '600', 
-                color: '#111827', 
-                marginBottom: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
+              <h3
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: "600",
+                  color: "#111827",
+                  marginBottom: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
                 🏷️ Tags
               </h3>
               <div className="product-page-tags">
-                {product.tags.split(",").map(
-                  (tag, idx) =>
-                    tag.trim() && (
-                      <span key={idx} className="product-page-tag">
-                        #{tag.trim()}
-                      </span>
-                    )
-                )}
+                {product.tags
+                  .split(",")
+                  .map(
+                    (tag, idx) =>
+                      tag.trim() && (
+                        <span key={idx} className="product-page-tag">
+                          #{tag.trim()}
+                        </span>
+                      )
+                  )}
               </div>
             </div>
           )}
 
-          {/* Action Buttons */}
           <div className="product-page-actions">
-            <button className="product-page-btn-primary">
+            <button
+              className="product-page-btn-primary"
+              onClick={handleMessageSeller}
+            >
               💬 Message Seller
             </button>
-            <button className="product-page-btn-secondary">
-              ❤️ Save
-            </button>
+            <button className="product-page-btn-secondary">❤️ Save</button>
           </div>
         </div>
       </div>
 
-      {/* Seller Section */}
       {seller && (
-        <div className="product-page-seller-section" style={{ marginTop: '40px' }}>
+        <div
+          className="product-page-seller-section"
+          style={{ marginTop: "40px" }}
+        >
           <h3>👤 About Seller</h3>
           <div className="product-page-seller-info">
             <img
@@ -198,14 +221,15 @@ const ProductPage = () => {
               </p>
             </div>
           </div>
-          
-          <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
-            <button className="product-page-btn-primary">
+
+          <div style={{ display: "flex", gap: "12px", marginTop: "20px" }}>
+            <button
+              className="product-page-btn-primary"
+              onClick={handleMessageSeller}
+            >
               💬 Contact Seller
             </button>
-            <button className="product-page-btn-secondary">
-              👤 View Profile
-            </button>
+            <button className="product-page-btn-secondary">👤 View Profile</button>
           </div>
         </div>
       )}

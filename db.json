@@ -180,5 +180,47 @@
       "tags": "sofa,furniture,vinatge,style,room,brand new,like new,second hand",
       "userId": "4eee"
     }
+  ],
+  "chats": [
+    {
+      "id": "chat_4eee_1",
+      "participants": [
+        "4eee",
+        "1"
+      ],
+      "messages": [
+        {
+          "id": "1756236923252",
+          "sender": "4eee",
+          "text": "hey there is the product still available?",
+          "time": "01:20"
+        },
+        {
+          "id": "1756237407918",
+          "sender": "4eee",
+          "text": "yes it is",
+          "time": "01:28"
+        },
+        {
+          "sender": "1",
+          "text": "ok that is really cool",
+          "timestamp": 1756237814701
+        }
+      ]
+    },
+    {
+      "id": "chat_4776_1",
+      "participants": [
+        "4776",
+        "1"
+      ],
+      "messages": [
+        {
+          "sender": "4776",
+          "text": "is the coat available?",
+          "timestamp": 1756238202472
+        }
+      ]
+    }
   ]
 }

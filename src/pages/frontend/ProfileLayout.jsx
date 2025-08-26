@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router";
 import "../../Css/ProfileLayout.css";
-import { User, List, Settings, LogOut } from "lucide-react";
+import { User, List, Settings, LogOut, MessageCircle } from "lucide-react";
 
 const ProfileLayout = () => {
   return (
@@ -16,8 +16,8 @@ const ProfileLayout = () => {
           <NavLink to="MyListings" className="sidebar-link">
             <List size={18} /> My Listings
           </NavLink>
-          <NavLink to="settings" className="sidebar-link">
-            <Settings size={18} /> Settings
+          <NavLink to="messages" className="sidebar-link">
+            <MessageCircle size={18} /> Messages
           </NavLink>
           <NavLink to="/logout" className="sidebar-link logout">
             <LogOut size={18} /> Logout
