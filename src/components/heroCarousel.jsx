@@ -3,11 +3,14 @@ import "../Css/HeroCarousel.css";
 import clothing from "../Assets/clothing.avif";
 import cars from "../Assets/cars.avif";
 import laptop from "../Assets/laptop.avif";
+import { NavLink } from "react-router";
 
 
 const HeroCarousel = () => {
   const images = [clothing,cars,laptop];
   const [currentIndex, setCurrentIndex] = useState(0);
+
+ 
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,9 +35,9 @@ const HeroCarousel = () => {
               Explore a curated collection of pre-loved fashion and vintage
               treasures.
             </p>
-            <a href="#browse" className="btn-primary">
+            <NavLink to="/products" className="btn-primary">
               Shop Now
-            </a>
+            </NavLink>
           </div>
         </div>
 

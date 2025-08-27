@@ -1,0 +1,35 @@
+.listings-wrapper {
+    padding: 20px;
+  }
+  
+  .listings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    justify-items: left; 
+  }
+  
+  .listings-container > * {
+    width: 100%;
+  }
+  
+  .no-listings {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #6B7280;
+    margin-top: 40px;
+  }
+  
+  @media (max-width: 1024px) {
+    .listings-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .listings-container {
+      grid-template-columns: 1fr; 
+      justify-items: center;
+    }
+  }
+  

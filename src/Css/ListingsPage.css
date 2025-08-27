@@ -69,3 +69,18 @@
     color: #6b7280;
   }
   
+  .listings-page .price-range {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+  }
+  
+  .listings-page .price-range input {
+    width: 70px;
+    padding: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+  

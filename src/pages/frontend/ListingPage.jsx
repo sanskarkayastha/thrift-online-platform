@@ -5,20 +5,50 @@ import { getUserById } from "../../services/user";
 import "../../Css/ListingsPage.css";
 import ProductCard from "../../components/ProductCard";
 
+// Full category/subcategory map
+const categoryMap = {
+  "Clothing & Fashion": ["Men", "Women", "Kids", "Unisex"],
+  "Electronics & Gadgets": [
+    "Phones", "Laptops", "Cameras", "Audio", "Wearables", "Gaming"
+  ],
+  "Home & Living": [
+    "Furniture", "Kitchenware", "Appliances", "Home Decor", "Lighting"
+  ],
+  "Books & Media": [
+    "Books", "Comics", "Magazines", "CDs/DVDs", "Vinyl", "Games"
+  ],
+  "Sports & Outdoors": [
+    "Fitness", "Outdoor Gear", "Bicycles", "Camping", "Sporting Goods"
+  ],
+  "Beauty & Personal Care": [
+    "Skincare", "Haircare", "Makeup", "Perfume", "Grooming Tools"
+  ],
+  "Toys, Kids & Baby": [
+    "Toys", "Baby Clothes", "Strollers", "Learning Tools"
+  ],
+  "Collectibles & Vintage": [
+    "Antiques", "Memorabilia", "Coins", "Art", "Handmade Crafts"
+  ],
+  Automotive: ["Car Accessories", "Motorbike Gear", "Tools", "Spare Parts"],
+  "Other / Miscellaneous": ["General"],
+};
+
 const ListingsPage = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
   const [filter, setFilter] = useState({
     category: "",
     subCategory: "",
     verified: false,
+    minPrice: "",
+    maxPrice: "",
+    sort: "", // "lowToHigh", "highToLow", "newest"
   });
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const search = query.get("search");
   const onlyVerified = query.get("filter") === "verified";
+  const preSelectedCategory = query.get("category") || "";
 
   useEffect(() => {
     const userId = localStorage.getItem("authToken");
@@ -28,6 +58,7 @@ const ListingsPage = () => {
         ? await getVerifiedProducts(userId)
         : await getAllProducts(userId);
 
+      // 🔹 Search support (products + seller name)
       if (search) {
         const lowerSearch = search.toLowerCase();
         const usersCache = {};
@@ -55,7 +86,7 @@ const ListingsPage = () => {
         });
       }
 
-    
+      // 🔹 Filters
       if (filter.category) {
         data = data.filter((p) => p.category === filter.category);
       }
@@ -65,28 +96,40 @@ const ListingsPage = () => {
       if (filter.verified) {
         data = data.filter((p) => p.verify === "Yes");
       }
+      if (filter.minPrice) {
+        data = data.filter((p) => parseInt(p.price.replace(/,/g, "")) >= parseInt(filter.minPrice));
+      }
+      if (filter.maxPrice) {
+        data = data.filter((p) => parseInt(p.price.replace(/,/g, "")) <= parseInt(filter.maxPrice));
+      }
+
+      // 🔹 Sorting
+      if (filter.sort === "lowToHigh") {
+        data.sort(
+          (a, b) =>
+            parseInt(a.price.replace(/,/g, "")) -
+            parseInt(b.price.replace(/,/g, ""))
+        );
+      } else if (filter.sort === "highToLow") {
+        data.sort(
+          (a, b) =>
+            parseInt(b.price.replace(/,/g, "")) -
+            parseInt(a.price.replace(/,/g, ""))
+        );
+      } else if (filter.sort === "newest") {
+        data.sort((a, b) => b.id.localeCompare(a.id)); // assuming id increments
+      }
 
       setProducts(data);
-
-      const cats = [...new Set(data.map((p) => p.category))];
-      setCategories(cats);
-
-      if (filter.category) {
-        const subs = [
-          ...new Set(
-            data
-              .filter((p) => p.category === filter.category)
-              .map((p) => p.subCategory)
-          ),
-        ];
-        setSubCategories(subs);
-      } else {
-        setSubCategories([]);
-      }
     };
 
+    // Initialize category from query param if available
+    if (preSelectedCategory) {
+      setFilter((prev) => ({ ...prev, category: preSelectedCategory }));
+    }
+
     fetchData();
-  }, [filter, search, onlyVerified]);
+  }, [filter, search, onlyVerified, preSelectedCategory]);
 
   return (
     <div className="listings-page">
@@ -103,7 +146,7 @@ const ListingsPage = () => {
           }
         >
           <option value="">All</option>
-          {categories.map((c) => (
+          {Object.keys(categoryMap).map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
@@ -111,7 +154,7 @@ const ListingsPage = () => {
         </select>
 
         {/* Subcategory Filter */}
-        {subCategories.length > 0 && (
+        {filter.category && categoryMap[filter.category] && (
           <>
             <label>Subcategory</label>
             <select
@@ -121,7 +164,7 @@ const ListingsPage = () => {
               }
             >
               <option value="">All</option>
-              {subCategories.map((sc) => (
+              {categoryMap[filter.category].map((sc) => (
                 <option key={sc} value={sc}>
                   {sc}
                 </option>
@@ -141,6 +184,40 @@ const ListingsPage = () => {
           />
           Verified Products
         </label>
+
+        {/* Price Range */}
+        <label>Price Range</label>
+        <div className="price-range">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filter.minPrice}
+            onChange={(e) =>
+              setFilter({ ...filter, minPrice: e.target.value })
+            }
+          />
+          <span>-</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={filter.maxPrice}
+            onChange={(e) =>
+              setFilter({ ...filter, maxPrice: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Sort */}
+        <label>Sort By</label>
+        <select
+          value={filter.sort}
+          onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
+        >
+          <option value="">Default</option>
+          <option value="lowToHigh">Price: Low to High</option>
+          <option value="highToLow">Price: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
       </aside>
 
       {/* Main Content */}

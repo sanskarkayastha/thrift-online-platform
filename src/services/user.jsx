@@ -27,12 +27,16 @@ export const addUser = async (user)=>{
     }
 }
 
-export const updateUserListings = async (id,listings)=>{
-    let data = await axios.patch(`http://localhost:4000/users,${id}`,{"listings":listings})
-    return data
-}
+export const updateUserListings = async (id, savedListings) => {
+    const response = await axios.patch(`http://localhost:4000/users/${id}`, {
+      savedListings,
+    });
+    return response.data;
+  };
+  
 
 export const getUserById = async (id)=>{
     let data = await axios.get(`http://localhost:4000/users/${id}`)
     return data
 }
+

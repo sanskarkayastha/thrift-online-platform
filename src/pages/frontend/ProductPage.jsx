@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { getProductById } from "../../services/product";
-import { getUserById } from "../../services/user";
-import { getChat, createChat } from "../../services/chat"; // import chat services
+import { getUserById, updateUserListings } from "../../services/user";
+import { getChat, createChat } from "../../services/chat"; 
 import "../../Css/ProductPage.css";
 
 const ProductPage = () => {
@@ -11,8 +11,9 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [seller, setSeller] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
 
-  const currentUserId = localStorage.getItem("authToken"); // logged-in user
+  const currentUserId = localStorage.getItem("authToken"); 
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,9 +34,16 @@ const ProductPage = () => {
         console.error("Error fetching product:", err);
       }
     };
+    const checkIfSaved = async () => {
+      if (!currentUserId) return;
+      const userRes = await getUserById(currentUserId);
+      const saved = userRes.data.savedListings || [];
+      setIsSaved(saved.includes(product?.id));
+    };
 
+    checkIfSaved();
     fetchProduct();
-  }, [id]);
+  }, [id,product, currentUserId]);
 
   const handleMessageSeller = async () => {
     if (!currentUserId) {
@@ -45,14 +53,11 @@ const ProductPage = () => {
 
     if (!seller) return;
 
-    // Check if chat exists
     let chatData = await getChat(currentUserId, seller.id);
     if (!chatData) {
-      // create new chat
       chatData = await createChat(currentUserId, seller.id);
     }
 
-    // Navigate to chat page in profile
     navigate(`/profile/messages/${seller.id}`);
   };
 
@@ -63,6 +68,28 @@ const ProductPage = () => {
       </div>
     );
   }
+
+  const handleSaveToggle = async () => {
+    if (!currentUserId) {
+      alert("Please login to save items.");
+      return;
+    }
+    const userRes = await getUserById(currentUserId);
+    const saved = userRes.data.savedListings || [];
+  
+    let updatedSaved;
+    if (isSaved) {
+      // unsave
+      updatedSaved = saved.filter((pid) => pid !== product.id);
+    } else {
+      // save
+      updatedSaved = [...saved, product.id];
+    }
+  
+    await updateUserListings(currentUserId, updatedSaved);
+    setIsSaved(!isSaved);
+  };
+
 
   return (
     <div className="product-page-container">
@@ -188,7 +215,12 @@ const ProductPage = () => {
             >
               💬 Message Seller
             </button>
-            <button className="product-page-btn-secondary">❤️ Save</button>
+            <button
+              className={`product-page-btn-secondary ${isSaved ? "saved" : ""}`}
+              onClick={handleSaveToggle}
+            >
+              {isSaved ? "❤️ Saved" : "❤️ Save"}
+            </button>
           </div>
         </div>
       </div>

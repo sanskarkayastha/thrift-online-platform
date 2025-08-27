@@ -12,6 +12,7 @@ import ProductPage from './pages/frontend/ProductPage';
 import ListingsPage from './pages/frontend/ListingPage';
 import MessagesList from './pages/frontend/MessageList';
 import ChatPage from './pages/frontend/ChatPage';
+import SavedListings from './pages/frontend/SavedListings';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="myListings" element={<MyListings />} />
               <Route path="messages" element={<MessagesList />} />
               <Route path="messages/:sellerId" element={<ChatPage/>} />
+              <Route path="savedListings" element={<SavedListings />} />
               {/* <Route path="settings" element={<SettingsPage />} /> */}
             </Route>
           </Route>

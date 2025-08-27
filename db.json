@@ -6,7 +6,10 @@
       "email": "jhon@gmail.com",
       "password": "12345",
       "phone": "12345",
-      "address": "bhaktapur"
+      "address": "bhaktapur",
+      "savedListings": [
+        "974f"
+      ]
     },
     {
       "id": "5aa1",
